@@ -6,19 +6,21 @@ import math
 #Input your knowns here, use 0 if not known
 #Ensure your units are consistent!
 g = 9.81
-z = 27.43
-density = 1000
-viscosity = 0.001
-length = 4827.8
+z = 24
+density = 817
+viscosity = 0.0018
+#There are two length components, L major and L minor, add up your L/D and place under the L_D variable
+length_major = 215.8
+L_D = 120 + 680
 #outer_diameter = 0.1
 #thickness = 1
-pressure = -206842
+pressure = 0
 epsilon = 0.000045
 q_dot = 0.03155
-diameter = 0.154
+diameter = 0.1022604
 
 #Place guesses here
-re_g = 100
+re_g = 100000
 diameter_g = 0.25
 pressure_g = 10
 
@@ -26,11 +28,12 @@ pressure_g = 10
 #diameter = outer_diameter - (2 * thickness)
 
 rough = epsilon / diameter
+length = (L_D / diameter) + length_major
 iteration = 1
 
 #formulas listed here
 def friction (rough, re_g):
-    ff = (-1.737 * math.log(abs((0.269 * rough) - ((2.185 / re_g) * math.log((0.269 * (rough)) + (14.5/re_g)))))) ** -2
+    ff = (-1.737 * math.log(abs((0.269 * rough) - ((2.185 / re_g) * math.log((0.269 * (rough)) + (14.5/re_g)))))) ** -2 
     return ff
 
 def vel (diameter, ff, density, length, pressure, g, z):
@@ -95,6 +98,8 @@ if problem == "q":
 
         ratio = re_new / re_g
         if 0.9 <= ratio <= 1.1:
+            print("reynolds" + str(re_new))       
+            print("ff" + str(ff))     
             q = qdot(diameter, velocity)
             print("success" + str(iteration))
             print(q)
@@ -105,6 +110,7 @@ if problem == "q":
             re_g = re_new
             print("iteration" + str(iteration))
             print("reynolds" + str(re_new))
+            print("ff" + str(ff))
         
         if iteration > 1000:
             break

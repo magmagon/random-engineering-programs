@@ -15,8 +15,8 @@ def func1(x):
     ]
 
 result = fsolve(func1, [1,2,3,4,5,6], xtol = 10e-6, maxfev=500)
-print(result)"""
-
+print(result)
+"""
 """
 def func2(x):
     return [x[0] + x[1] - 3,
@@ -29,10 +29,11 @@ def func2(x):
             (1.737 * (np.log((0.269* 0.000045/0.45) + (1.257/(x[7] * (x[5]**0.5)))))) + (1/(x[5]**0.5)),
     ]
 result = fsolve(func2, [10,10,5,5,0.0001,0.0001,69420,69420], xtol = 10e-06)
-print(result) """
+print(result) 
+"""
 
 def func(x):
-    return [(8000*0.68) - x[0],
+    return [(8000*0.68) - (x[0]*998*9.81*7),
     x[1] - x[2] - 7,
     x[2] - x[3],
     x[2] - x[4],
